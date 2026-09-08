@@ -1,0 +1,78 @@
+# tarea-4-3-eslabones-
+tarea 4 (3 eslabones)
+codigo : clear; clc;
+
+L1 = 10;
+L2 = 8;
+L3 = 6;
+
+angulo_hombro_final = input('Grados que rota el hombro: ');
+angulo_codo_final   = input('Grados que rota el codo: ');
+angulo_muneca_final = input('Grados que rota la muneca: ');
+
+theta1 = 0; theta2 = 0; theta3 = 0;
+
+for theta1 = 0:1:angulo_hombro_final
+    p1 = rot2d(theta1) * [L1; 0];
+    p2 = p1 + rot2d(theta1+theta2) * [L2; 0];
+    p3 = p2 + rot2d(theta1+theta2+theta3) * [L3; 0];
+
+    clf; hold on; grid on; axis equal
+    axis([-15 30 -5 30])
+
+    plot([0 p1(1)], [0 p1(2)], 'b-o', 'LineWidth', 3);
+    plot([p1(1) p2(1)], [p1(2) p2(2)], 'r-o', 'LineWidth', 3);
+    plot([p2(1) p3(1)], [p2(2) p3(2)], 'g-o', 'LineWidth', 3);
+    plot(p3(1), p3(2), 'ko', 'MarkerFaceColor', 'k', 'MarkerSize', 8);
+
+    title(sprintf('Hombro: %d | Codo: %d | Muneca: %d', theta1, theta2, theta3));
+    xlabel('X (cm)'); ylabel('Y (cm)');
+    drawnow; pause(0.05);
+end
+
+theta1 = angulo_hombro_final;
+
+for theta2 = 0:1:angulo_codo_final
+    p1 = rot2d(theta1) * [L1; 0];
+    p2 = p1 + rot2d(theta1+theta2) * [L2; 0];
+    p3 = p2 + rot2d(theta1+theta2+theta3) * [L3; 0];
+
+    clf; hold on; grid on; axis equal
+    axis([-15 30 -5 30])
+
+    plot([0 p1(1)], [0 p1(2)], 'b-o', 'LineWidth', 3);
+    plot([p1(1) p2(1)], [p1(2) p2(2)], 'r-o', 'LineWidth', 3);
+    plot([p2(1) p3(1)], [p2(2) p3(2)], 'g-o', 'LineWidth', 3);
+    plot(p3(1), p3(2), 'ko', 'MarkerFaceColor', 'k', 'MarkerSize', 8);
+
+    title(sprintf('Hombro: %d | Codo: %d | Muneca: %d', theta1, theta2, theta3));
+    xlabel('X (cm)'); ylabel('Y (cm)');
+    drawnow; pause(0.05);
+end
+
+theta2 = angulo_codo_final;
+
+for theta3 = 0:1:angulo_muneca_final
+    p1 = rot2d(theta1) * [L1; 0];
+    p2 = p1 + rot2d(theta1+theta2) * [L2; 0];
+    p3 = p2 + rot2d(theta1+theta2+theta3) * [L3; 0];
+
+    clf; hold on; grid on; axis equal
+    axis([-15 30 -5 30])
+
+    plot([0 p1(1)], [0 p1(2)], 'b-o', 'LineWidth', 3);
+    plot([p1(1) p2(1)], [p1(2) p2(2)], 'r-o', 'LineWidth', 3);
+    plot([p2(1) p3(1)], [p2(2) p3(2)], 'g-o', 'LineWidth', 3);
+    plot(p3(1), p3(2), 'ko', 'MarkerFaceColor', 'k', 'MarkerSize', 8);
+
+    title(sprintf('Hombro: %d | Codo: %d | Muneca: %d', theta1, theta2, theta3));
+    xlabel('X (cm)'); ylabel('Y (cm)');
+    drawnow; pause(0.05);
+end
+
+function R = rot2d(ang)
+c = cosd(ang);
+s = sind(ang);
+R = [c -s; s c];
+end
+
